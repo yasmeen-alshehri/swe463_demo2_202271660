@@ -1,8 +1,20 @@
-import 'person.dart';
+class UserProfile {
+  final String name;
+  String? bio;
 
-void main() {
-  final person = GreetingPerson('Ali', 'Hussian');
-  person.sayHi();
+  UserProfile(this.name, {this.bio});
+
+  String getDisplayBio() {
+    return bio ?? 'No bio provided.';
+  }
 }
 
-// GreetingPerson can access _firstName and _lastName because it is part of the same library as Person
+void main() {
+  final user1 = UserProfile('Ahmed');
+  final user2 = UserProfile('Layla', bio: 'Flutter Developer');
+  final user3 = UserProfile('Yasmeen');
+
+  print(user1.getDisplayBio());
+  print(user2.getDisplayBio());
+  print(user3.getDisplayBio());
+}
