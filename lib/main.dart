@@ -1,14 +1,17 @@
-void main() {
-  List<String> fruitsList = [];
-  List<String> moreFruits = ['grape', 'kiwi','mango'];
+class User {
+  final String username;
+  final String email;
 
-  List<String> allFruits = [
-    'watermelon',
-    if (fruitsList.isNotEmpty) ...fruitsList,
-    for (var fruit in moreFruits) fruit,
-  ];
-
-  print(allFruits);
+  User(this.username, this.email);
 }
 
-// The spread operator (...) adds all elements of a list into another collection.
+void main() {
+  var user = User('ali_ux', 'ali@email.com');
+  var user2 = User('yasmeen_ux', 'yasmeen@gmail.com');
+
+  print(user.username);
+  print(user.email);
+
+  print(user2.username);
+  print(user2.email);
+}
