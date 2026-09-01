@@ -1,67 +1,24 @@
-class User {
-  final String username;
-  final String email;
-
-  User(this.username, this.email);
+Future<String> fetchData() async {
+  await Future.delayed(const Duration(seconds: 2));
+  return 'Fetched Data';
 }
 
-abstract class Post {
-  final String author;
+Future<void> main() async {
+  print('[1] Using async/await');
+  print('[2] Fetching data...');
 
-  Post(this.author);
+  final data = await fetchData();
+  print('[3] Result: $data');
 
-  void render();
+  print('[4] Using .then()');
+
+  fetchData().then((value) {
+    print('[6] .then() result: $value');
+  }).catchError((error) {
+    print('[7] Error: $error');
+  });
+
+  print('[5] Program continues after .then() call');
 }
 
-class TextPost extends Post {
-  final String text;
-
-  TextPost(String author, this.text) : super(author);
-
-  @override
-  void render() {
-    print('Text post by $author: "$text"');
-  }
-}
-
-class ApiResponse<T> {
-  final bool success;
-  final T? data;
-  final String? errorMessage;
-
-  ApiResponse(this.success, {this.data, this.errorMessage});
-}
-
-void main() {
-  final userResponse = ApiResponse<User>(
-    true,
-    data: User('khalid', 'khalid@example.com'),
-  );
-
-  print(userResponse.data?.username);
-
-  final postResponse = ApiResponse<Post>(
-    true,
-    data: TextPost('Turki', 'Flutter is awesome'),
-  );
-
-  if (postResponse.success) {
-    postResponse.data?.render();
-  } else {
-    print('Response failed: ${postResponse.errorMessage}');
-  }
-
-  final errorResponse = ApiResponse<User>(
-    false,
-    errorMessage: 'Unable to load user',
-  );
-
-  print(errorResponse.errorMessage);
-
-  final intResponse = ApiResponse<int>(
-    true,
-    data: 200,
-  );
-
-  print(intResponse.data);
-}
+// Order: [1] → [2] → [3] → [4] → [5] → [6]
