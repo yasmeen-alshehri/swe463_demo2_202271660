@@ -1,25 +1,8 @@
-class Animal {
-  void makeSound() {
-    print('Some generic sound');
-  }
-}
-
-mixin Swimmer {
-  void swim() {
-    print('I can swim!');
-  }
-}
-
-class Dolphin extends Animal with Swimmer {}
-
-class Duck extends Animal with Swimmer {}
+import 'person.dart';
 
 void main() {
-  final dolphin = Dolphin();
-  dolphin.swim();
-  dolphin.makeSound();
-
-  final duck = Duck();
-  duck.swim();
-  duck.makeSound();
+  final person = GreetingPerson('Ali', 'Hussian');
+  person.sayHi();
 }
+
+// GreetingPerson can access _firstName and _lastName because it is part of the same library as Person
